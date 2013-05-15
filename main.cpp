@@ -28,28 +28,9 @@ using namespace fengine;
 
 int main(int argc, char *argv[])
 {
-    //Set intiial values for the server port and number of threads to
-    //initialise
-    int port = 1234;
-    int numThreads = 5;
+    Fengine my_fengine;
 
-    //Assign port number and number of threads if passed into the program
-    if (argc > 1 )
-    {
-        port = atoi(argv[1]);
-        if (argc > 2)
-        {
-            numThreads = atoi(argv[2]);
-        }
-    }
-
-    Fengine *my_fengine_p = new Fengine();
-
-    my_fengine_p->run();
-
-    delete my_fengine_p;
-
-    my_fengine_p = 0;
+    my_fengine.run();
 
     return 0;
 }
