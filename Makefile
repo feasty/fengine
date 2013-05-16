@@ -12,17 +12,23 @@ debug: EXECUTABLE=fengine_debug
 debug: fengine
 
 #Compiles everything
-fengine: main.o fengine.o window.o renderer.o
+fengine: main.o shader.o fengine.o window.o renderer.o triangle.o
 	$(CC) main.o \
+	shader.o \
 	fengine.o \
 	window.o \
 	renderer.o \
+	triangle.o \
 	$(LIBS) \
 	-o $(EXECUTABLE)
 
 #Compiles the main file
 main.o: main.cpp
 	$(CC) $(CFLAGS) main.cpp
+	
+#Compiles the shader class
+shader.o: shader.cpp
+	$(CC) $(CFLAGS) shader.cpp
 
 #Compiles the main engine class
 fengine.o: fengine.cpp
@@ -35,6 +41,10 @@ window.o: window.cpp
 #Compiles the renderer class
 renderer.o: renderer.cpp
 	$(CC) $(CFLAGS) renderer.cpp
+	
+#Compiles the triangle class
+triangle.o: shapes/triangle.cpp
+	$(CC) $(CFLAGS) shapes/triangle.cpp
 
 #Clean up the files
 clean:

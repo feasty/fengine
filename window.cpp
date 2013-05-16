@@ -59,6 +59,8 @@ bool Fengine_window::initialise(string window_title)
 		// Open a window and create its OpenGL context
 		if( glfwOpenWindow( m_window_width, m_window_height, 0,0,0,0, 32,0, GLFW_WINDOW ) )
 		{
+			glewExperimental = true;
+
 			// Initialise GLEW
 			if (glewInit() == GLEW_OK)
 			{

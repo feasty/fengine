@@ -21,6 +21,10 @@
 **/
 
 #include "renderer.hpp"
+#include "shader.hpp"
+#include "shapes/triangle.hpp"
+
+using namespace shapes;
 
 namespace fengine
 {
@@ -37,8 +41,21 @@ Fengine_renderer::~Fengine_renderer()
 
 void Fengine_renderer::draw()
 {
+	GLuint VertexArrayID;
+	glGenVertexArrays(1, &VertexArrayID);
+	glBindVertexArray(VertexArrayID);
+
+	Fengine_triangle triangle("shaders/SimpleVertexShader.vs", "shaders/SimpleFragmentShader.fs");
+
+	Uint32 count = 0;
+
 	do{
 		//Draw here
+
+		// Clear the screen
+		glClear( GL_COLOR_BUFFER_BIT );
+
+		triangle.draw();
 
 		//Swap the buffers
 		glfwSwapBuffers();
@@ -47,6 +64,9 @@ void Fengine_renderer::draw()
 	//Check if the ESC key was pressed or the window was closed
 	while( glfwGetKey( GLFW_KEY_ESC ) != GLFW_PRESS &&
 		   glfwGetWindowParam( GLFW_OPENED ) );
+
+	// Cleanup VBO
+	glDeleteVertexArrays(1, &VertexArrayID);
 
 	//Close OpenGL window and terminate GLFW
 	glfwTerminate();
