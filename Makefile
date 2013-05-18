@@ -12,13 +12,17 @@ debug: EXECUTABLE=fengine_debug
 debug: fengine
 
 #Compiles everything
-fengine: main.o shader.o fengine.o window.o renderer.o triangle.o
+fengine: main.o shader.o fengine.o window.o renderer.o triangle.o matrix.o camera.o object.o model.o
 	$(CC) main.o \
 	shader.o \
 	fengine.o \
 	window.o \
 	renderer.o \
 	triangle.o \
+	matrix.o \
+	camera.o \
+	object.o \
+	model.o \
 	$(LIBS) \
 	-o $(EXECUTABLE)
 
@@ -27,24 +31,40 @@ main.o: main.cpp
 	$(CC) $(CFLAGS) main.cpp
 	
 #Compiles the shader class
-shader.o: shader.cpp
-	$(CC) $(CFLAGS) shader.cpp
+shader.o: base/shader.cpp
+	$(CC) $(CFLAGS) base/shader.cpp
 
 #Compiles the main engine class
 fengine.o: fengine.cpp
 	$(CC) $(CFLAGS) fengine.cpp
 
 #Compiles the window class
-window.o: window.cpp
-	$(CC) $(CFLAGS) window.cpp
+window.o: base/window.cpp
+	$(CC) $(CFLAGS) base/window.cpp
 	
 #Compiles the renderer class
-renderer.o: renderer.cpp
-	$(CC) $(CFLAGS) renderer.cpp
+renderer.o: base/renderer.cpp
+	$(CC) $(CFLAGS) base/renderer.cpp
 	
 #Compiles the triangle class
 triangle.o: shapes/triangle.cpp
 	$(CC) $(CFLAGS) shapes/triangle.cpp
+	
+#Compiles the matrix class
+matrix.o: math/matrix.cpp
+	$(CC) $(CFLAGS) math/matrix.cpp
+	
+#Compiles the camera class
+camera.o: base/camera.cpp
+	$(CC) $(CFLAGS) base/camera.cpp
+	
+#Compiles the object class
+object.o: base/object.cpp
+	$(CC) $(CFLAGS) base/object.cpp
+	
+#Compiles the model class
+model.o: base/model.cpp
+	$(CC) $(CFLAGS) base/model.cpp
 
 #Clean up the files
 clean:

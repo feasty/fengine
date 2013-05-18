@@ -1,5 +1,5 @@
 /**
-*  shader.hpp
+*  camera.hpp
 *
 *  Copyright 2012  <feasty@digitaldrugs.co.uk>
 *
@@ -20,33 +20,42 @@
 *
 **/
 
-#include <GL/glew.h>
-#include <string>
+#ifndef FENGINE_CAMERA_HPP
+#define FENGINE_CAMERA_HPP
 
-#ifndef FENGINE_SHADER_HPP
-#define FENGINE_SHADER_HPP
+#include "object.hpp"
+
+#include <glm/glm.hpp>
 
 namespace fengine
 {
 
-class Fengine_shader
+class Fengine_camera : public Fengine_object
 {
 public:
+	///
+	/// @brief	The default contructor
+	///
+	Fengine_camera();
 
 	///
-	/// @brief	The contructor
+	/// @brief	A constructor that initialises the cameras position, look_at and up vectors
 	///
-	Fengine_shader();
+	/// @param[in]	pos		The position to initialise to
+	/// @param[in]	look_at	The location the model should face
+	///	@param[in]	up		The up vector of the model
+	///
+	Fengine_camera(glm::vec3 pos, glm::vec3 look_at, glm::vec3 up);
 
 	///
 	/// @brief	The destructor
 	///
-	~Fengine_shader();
+	~Fengine_camera();
 
 	///
-	/// @brief	Loads a vertex and fragment shader
+	///	@brief	Updates the cameras position
 	///
-	static GLuint load_shaders(const std::string &vertex_file_path, const std::string &fragment_file_path);
+	void update();
 
 protected:
 
@@ -56,4 +65,4 @@ private:
 
 }
 
-#endif //FENGINE_RENDERER_HPP
+#endif //FENGINE_CAMERA_HPP

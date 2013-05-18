@@ -32,8 +32,8 @@ Fengine_window::Fengine_window():
 		m_fsaa_samples(2),
 		m_gl_major_version(3),
 		m_gl_minor_version(3),
-		m_window_width(1333),
-		m_window_height(720)
+		m_window_width(1024),
+		m_window_height(768)
 {
 
 }

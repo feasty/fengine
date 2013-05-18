@@ -26,6 +26,7 @@
 #include <string>
 
 #include <GL/glew.h>
+#include <glm/glm.hpp>
 
 namespace shapes
 {
@@ -57,7 +58,7 @@ public:
 	///
 	/// @brief	Draws the triangle
 	///
-	void draw();
+	void draw(glm::mat4 &mvp);
 
 	///
 	/// @brief	Sets the shader to use for rendering
@@ -73,6 +74,13 @@ private:
 	///	@brief	The id of the shader program
 	///
 	GLuint	m_shader_id;
+
+	///
+	///	@var m_matrix_id
+	///
+	///	@brief	Gets a handle to the shaders mvp uniform
+	///
+	GLuint m_matrix_id;
 
 	///
 	/// @var	m_vertexbuffer

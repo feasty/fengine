@@ -64,7 +64,7 @@ GLuint Fengine_shader::load_shaders(const string &vertex_file_path, const string
 			VertexShaderCode += "\n" + Line;
 		VertexShaderStream.close();
 	}else{
-		printf("Cannot load shader ", vertex_file_path.c_str());
+		printf("Cannot load shader %s", vertex_file_path.c_str());
 		return 0;
 	}
 

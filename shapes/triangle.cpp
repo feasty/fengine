@@ -21,10 +21,11 @@
 **/
 
 #include "triangle.hpp"
-#include "../shader.hpp"
+#include "../base/shader.hpp"
 
 using namespace std;
 using namespace fengine;
+using namespace glm;
 
 namespace shapes
 {
@@ -33,6 +34,9 @@ Fengine_triangle::Fengine_triangle(const string virtex_shader, const string frag
 		m_vertexbuffer(0)
 {
 	m_shader_id = Fengine_shader::load_shaders( virtex_shader, fragment_shader);
+
+	// Get a handle for our "MVP" uniform
+	m_matrix_id = glGetUniformLocation(m_shader_id, "MVP");
 
 	glGenBuffers(1, &m_vertexbuffer);
 	glBindBuffer(GL_ARRAY_BUFFER, m_vertexbuffer);
@@ -44,16 +48,20 @@ Fengine_triangle::~Fengine_triangle()
 	glDeleteBuffers(1, &m_vertexbuffer);
 }
 
-void Fengine_triangle::draw()
+void Fengine_triangle::draw(mat4 &mvp)
 {
 	//Use our shader
 	glUseProgram(m_shader_id);
 
-	//1st attribute buffer : vertices
+	// Send our transformation to the currently bound shader,
+	// in the "MVP" uniform
+	glUniformMatrix4fv(m_matrix_id, 1, GL_FALSE, &mvp[0][0]);
+
+	// First attribute buffer : vertices
 	glEnableVertexAttribArray(0);
 	glBindBuffer(GL_ARRAY_BUFFER, m_vertexbuffer);
 	glVertexAttribPointer(
-		0,                  // attribute 0. No particular reason for 0, but must match the layout in the shader.
+		0,                  // attribute. No particular reason for 0, but must match the layout in the shader.
 		3,                  // size
 		GL_FLOAT,           // type
 		GL_FALSE,           // normalized?
@@ -61,7 +69,7 @@ void Fengine_triangle::draw()
 		(void*)0            // array buffer offset
 	);
 
-	//Draw the triangle
+	// Draw the triangle
 	glDrawArrays(GL_TRIANGLES, 0, 3); // 3 indices starting at 0 -> 1 triangle
 
 	glDisableVertexAttribArray(0);
@@ -70,6 +78,9 @@ void Fengine_triangle::draw()
 void Fengine_triangle::set_shader(const string virtex_shader, const string fragment_shader)
 {
 	m_shader_id = Fengine_shader::load_shaders( virtex_shader, fragment_shader);
+
+	// Get a handle for our "MVP" uniform
+	m_matrix_id = glGetUniformLocation(m_shader_id, "MVP");
 }
 
 }

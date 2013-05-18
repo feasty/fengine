@@ -49,7 +49,12 @@ public:
 protected:
 
 private:
-
+	///
+	///	@var	m_projection_mat
+	///
+	///	@brief	The projection matrix
+	///
+	glm::mat4	m_projection_mat;
 };
 
 }
