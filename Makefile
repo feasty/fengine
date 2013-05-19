@@ -1,5 +1,5 @@
 CC=g++
-CFLAGS=-c -Wall #-std=c++11 -std=gnu++11
+CFLAGS=-c -Wall -std=c++0x #-std=c++11 -std=gnu++11
 LIBS=-lGLEW -lGL -lGLU -lglfw
 EXECUTABLE=fengine
 

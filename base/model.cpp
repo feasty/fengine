@@ -21,7 +21,6 @@
 **/
 
 #include "model.hpp"
-#include "shader.hpp"
 
 #include <glm/gtc/matrix_transform.hpp>
 
@@ -38,19 +37,20 @@ Fengine_model::Fengine_model()
 
 Fengine_model::Fengine_model(
 		const string model_path,
-		const string virtex_shader,
-		const string fragment_shader,
+		Fengine_shader &shader,
 		glm::vec3 pos,
 		glm::vec3 look_at,
 		glm::vec3 up
 		):
 		Fengine_object(pos, look_at, up),
+		m_shader_p(nullptr),
+		m_matrix_id(0),
 		m_vertex_buffer(0)
 {
-	m_shader_id = Fengine_shader::load_shaders( virtex_shader, fragment_shader);
+	m_shader_p = &shader;
 
 	// Get a handle for our "MVP" uniform
-	m_matrix_id = glGetUniformLocation(m_shader_id, "MVP");
+	m_matrix_id = glGetUniformLocation(m_shader_p->get_program_id(), "MVP");
 
 	const GLfloat *model = load_model(model_path);
 
@@ -66,8 +66,7 @@ Fengine_model::~Fengine_model()
 
 void Fengine_model::update()
 {
-	//Perform the translation on the objects matrix
-	m_model_matrix = lookAt(m_position, m_look_at, m_up);
+	Fengine_object::update();
 }
 
 const GLfloat *Fengine_model::load_model(string model_path)
@@ -81,4 +80,5 @@ const GLfloat *Fengine_model::load_model(string model_path)
 
 	return tri;
 }
+
 }

@@ -36,15 +36,23 @@ public:
 	///
 	/// @brief	The contructor
 	///
-	Fengine_shader();
+	Fengine_shader(const std::string &vertex_file_path, const std::string &fragment_file_path);
 
 	///
 	/// @brief	The destructor
 	///
 	~Fengine_shader();
 
-	//TODO: this should go in the constructor
+	///
+	///	@brief	Getter for the shaders program ID
+	///
+	///	@return	The program ID of the loaded shaders
+	///
+	GLuint get_program_id();
 
+protected:
+
+private:
 	///
 	/// @brief	Loads a vertex and fragment shader
 	///
@@ -53,12 +61,14 @@ public:
 	///
 	///	@return	Returns a program ID for the shader
 	///
-	static GLuint load_shaders(const std::string &vertex_file_path, const std::string &fragment_file_path);
+	bool load_shaders(const std::string &vertex_file_path, const std::string &fragment_file_path);
 
-protected:
-
-private:
-
+	///
+	///	@var	m_program_id
+	///
+	///	@brief 	The program ID of the shader after it has been loaded
+	///
+	GLuint	m_program_id;
 };
 
 }

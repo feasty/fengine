@@ -31,7 +31,7 @@ namespace fengine
 
 Fengine_object::Fengine_object():
 				m_model_matrix(1.0f),
-				m_position(0.0f, 0.0f, -10.0f),
+				m_position(0.0f, 0.0f, 0.0f),
 				m_look_at(0.0f, 0.0f, 0.0f),
 				m_up(0.0f, 1.0f, 0.0f)
 {
@@ -51,6 +51,34 @@ Fengine_object::Fengine_object(glm::vec3 pos, glm::vec3 look_at, glm::vec3 up):
 Fengine_object::~Fengine_object()
 {
 
+}
+
+void Fengine_object::update()
+{
+	//Perform the translation on the objects matrix
+	m_model_matrix = lookAt(m_position, m_look_at, m_up);
+}
+
+// Moved the object by the amount specified
+void Fengine_object::move_by(GLfloat x, GLfloat y, GLfloat z)
+{
+	m_position.x += x;
+	m_position.y += y;
+	m_position.z += z;
+}
+
+// Moved the object to the position specified
+void Fengine_object::move_to(GLfloat x, GLfloat y, GLfloat z)
+{
+	m_position.x = x;
+	m_position.y = y;
+	m_position.z = z;
+}
+
+// Moved the object to the position specified
+void Fengine_object::move_to(glm::vec3 pos)
+{
+	m_position = pos;
 }
 
 // Gets the objects position vector

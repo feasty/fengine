@@ -42,7 +42,7 @@ void Fengine::run()
 
 	renderer.initialise("Fengine");
 
-	renderer.draw();
+	renderer.draw_scene();
 }
 
 }

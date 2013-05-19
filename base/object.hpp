@@ -24,6 +24,7 @@
 #define FENGINE_OBJECT_HPP
 
 #include <glm/glm.hpp>
+#include <GL/glew.h>
 
 namespace fengine
 {
@@ -51,10 +52,26 @@ public:
 	virtual ~Fengine_object();
 
 	///
-	///	@brief	This updates the objects location, rotation, translation and
-	///			should be implemented by the base class
+	///	@brief	This is the base implementation of the update method.
 	///
-	virtual void update() = 0;
+	///	This simply performs a translation on the object.
+	///
+	virtual void update();
+
+	///
+	///	@brief	Moved the object by the amount specified
+	///
+	virtual void move_by(GLfloat x, GLfloat y, GLfloat z);
+
+	///
+	///	@brief	Moved the object to the position specified
+	///
+	virtual void move_to(GLfloat x, GLfloat y, GLfloat z);
+
+	///
+	///	@brief	Moved the object to the position specified
+	///
+	virtual void move_to(glm::vec3 pos);
 
 	///
 	///	@brief	Gets the objects position vector

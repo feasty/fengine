@@ -23,6 +23,8 @@
 #ifndef FENGINE_TRIANGLE_HPP
 #define FENGINE_TRIANGLE_HPP
 
+#include "../base/shader.hpp"
+
 #include <string>
 
 #include <GL/glew.h>
@@ -48,7 +50,7 @@ public:
 	///
 	/// @brief	The contructor
 	///
-	Fengine_triangle(std::string virtex_shader, std::string fragment_shader);
+	Fengine_triangle(fengine::Fengine_shader &shader);
 
 	///
 	/// @brief	The destructor
@@ -63,17 +65,31 @@ public:
 	///
 	/// @brief	Sets the shader to use for rendering
 	///
-	void set_shader(const std::string virtex_shader, const std::string fragment_shader);
+	void set_shader(fengine::Fengine_shader &shader);
+
+	///
+	///	@brief	Getter for the models matrix
+	///
+	///	@return	Returns the models matrix
+	///
+	glm::mat4 get_model_matrix();
 
 protected:
 
 private:
 	///
-	///	@var m_shader_id
+	///	@var	m_model_matrix
 	///
-	///	@brief	The id of the shader program
+	///	@brief	The object view matrix
 	///
-	GLuint	m_shader_id;
+	glm::mat4	m_model_matrix;
+
+	///
+	///	@var m_shader
+	///
+	///	@brief	A pointer to the shader to use on the object
+	///
+	fengine::Fengine_shader	*m_shader_p;
 
 	///
 	///	@var m_matrix_id

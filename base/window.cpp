@@ -32,8 +32,8 @@ Fengine_window::Fengine_window():
 		m_fsaa_samples(2),
 		m_gl_major_version(3),
 		m_gl_minor_version(3),
-		m_window_width(1024),
-		m_window_height(768)
+		m_window_width(1333),
+		m_window_height(720)
 {
 
 }
@@ -87,4 +87,13 @@ bool Fengine_window::initialise(string window_title)
 	return success;
 }
 
+GLuint Fengine_window::get_window_height()
+{
+	return m_window_height;
+}
+
+GLuint Fengine_window::get_window_width()
+{
+	return m_window_width;
+}
 }

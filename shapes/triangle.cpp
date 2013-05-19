@@ -21,7 +21,6 @@
 **/
 
 #include "triangle.hpp"
-#include "../base/shader.hpp"
 
 using namespace std;
 using namespace fengine;
@@ -30,13 +29,16 @@ using namespace glm;
 namespace shapes
 {
 
-Fengine_triangle::Fengine_triangle(const string virtex_shader, const string fragment_shader):
+Fengine_triangle::Fengine_triangle(Fengine_shader &shader):
+		m_model_matrix(mat4(1.0f)),
+		m_shader_p(nullptr),
+		m_matrix_id(0),
 		m_vertexbuffer(0)
 {
-	m_shader_id = Fengine_shader::load_shaders( virtex_shader, fragment_shader);
+	m_shader_p = &shader;
 
 	// Get a handle for our "MVP" uniform
-	m_matrix_id = glGetUniformLocation(m_shader_id, "MVP");
+	m_matrix_id = glGetUniformLocation(m_shader_p->get_program_id(), "MVP");
 
 	glGenBuffers(1, &m_vertexbuffer);
 	glBindBuffer(GL_ARRAY_BUFFER, m_vertexbuffer);
@@ -51,7 +53,7 @@ Fengine_triangle::~Fengine_triangle()
 void Fengine_triangle::draw(mat4 &mvp)
 {
 	//Use our shader
-	glUseProgram(m_shader_id);
+	glUseProgram(m_shader_p->get_program_id());
 
 	// Send our transformation to the currently bound shader,
 	// in the "MVP" uniform
@@ -75,12 +77,17 @@ void Fengine_triangle::draw(mat4 &mvp)
 	glDisableVertexAttribArray(0);
 }
 
-void Fengine_triangle::set_shader(const string virtex_shader, const string fragment_shader)
+void Fengine_triangle::set_shader(Fengine_shader &shader)
 {
-	m_shader_id = Fengine_shader::load_shaders( virtex_shader, fragment_shader);
+	m_shader_p = &shader;
 
 	// Get a handle for our "MVP" uniform
-	m_matrix_id = glGetUniformLocation(m_shader_id, "MVP");
+	m_matrix_id = glGetUniformLocation(m_shader_p->get_program_id(), "MVP");
+}
+
+glm::mat4 Fengine_triangle::get_model_matrix()
+{
+	return m_model_matrix;
 }
 
 }

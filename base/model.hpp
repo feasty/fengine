@@ -24,6 +24,7 @@
 #define FENGINE_MODEL_HPP
 
 #include "object.hpp"
+#include "shader.hpp"
 
 #include <GL/glew.h>
 #include <glm/glm.hpp>
@@ -51,8 +52,7 @@ public:
 	///
 	Fengine_model(
 			const std::string model_path,
-			const std::string virtex_shader,
-			const std::string fragment_shader,
+			Fengine_shader &shader,
 			glm::vec3 pos,
 			glm::vec3 look_at,
 			glm::vec3 up
@@ -76,11 +76,13 @@ public:
 
 protected:
 	///
-	///	@var m_shader_id
+	///	@var m_shader
 	///
-	///	@brief	The id of the shader program
+	///	@brief	The shader to be used on the model
 	///
-	GLuint	m_shader_id;
+	///	This pointer does not take ownership of the shader.
+	///
+	Fengine_shader	*m_shader_p;
 
 	///
 	///	@var m_matrix_id

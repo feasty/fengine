@@ -57,7 +57,21 @@ public:
 	///
 	/// @brief	Draws the scene
 	///
-	virtual void draw() = 0;
+	virtual void draw_scene() = 0;
+
+	///
+	///	@brief	Getter for the window height in pixels
+	///
+	///	@return	The windows height dimenstion in pixels
+	///
+	GLuint get_window_height();
+
+	///
+	///	@brief	Getter for the window width in pixels
+	///
+	///	@return	The windows width dimension in pixels
+	///
+	GLuint get_window_width();
 
 protected:
 
@@ -67,35 +81,35 @@ private:
 	///
 	///	@brief	The number of FSAA samples
 	///
-	Uint8	m_fsaa_samples;
+	GLuint	m_fsaa_samples;
 
 	///
 	///	@var	m_gl_major_version
 	///
 	///	@brief	The OpenGL major version (defaults to 3)
 	///
-	Uint8	m_gl_major_version;
+	GLuint	m_gl_major_version;
 
 	///
 	///	@var	m_gl_minor_version
 	///
 	///	@brief	The OpenGL minor version (defaults to 3)
 	///
-	Uint8	m_gl_minor_version;
+	GLuint	m_gl_minor_version;
 
 	///
 	///	@var	m_window_width
 	///
 	///	@brief	The window width (defaults to 1333)
 	///
-	Uint16	m_window_width;
+	GLuint	m_window_width;
 
 	///
 	///	@var	m_window_height
 	///
 	///	@brief	The window height (defaults to 720)
 	///
-	Uint16	m_window_height;
+	GLuint	m_window_height;
 };
 
 }

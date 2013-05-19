@@ -21,6 +21,8 @@
 **/
 #include "window.hpp"
 
+#include <glm/glm.hpp>
+
 #ifndef FENGINE_RENDERER_HPP
 #define FENGINE_RENDERER_HPP
 
@@ -44,17 +46,12 @@ public:
 	///
 	/// @brief	Draws the scene
 	///
-	void draw();
+	void draw_scene();
 
 protected:
 
 private:
-	///
-	///	@var	m_projection_mat
-	///
-	///	@brief	The projection matrix
-	///
-	glm::mat4	m_projection_mat;
+
 };
 
 }

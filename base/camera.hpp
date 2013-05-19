@@ -57,10 +57,67 @@ public:
 	///
 	void update();
 
+	///
+	///	@brief	Moves the camera based on what keypresses and mouse movements have happened
+	///
+	void move_camera();
+
+	///
+	///	@brief	Gets the projection matrix
+	///
+	///	@return	The projection matrix
+	///
+	glm::mat4 get_projection_matrix();
+
 protected:
 
 private:
+	///
+	///	@var	m_projection_mat
+	///
+	///	@brief	The projection matrix
+	///
+	glm::mat4	m_projection_mat;
 
+	///
+	///	@var	m_horizontal_angle
+	///
+	///	@brief	The horizontal angle of the camera
+	///
+	float m_horizontal_angle;
+
+	///
+	///	@var	m_vertical_angle
+	///
+	///	@brief	The vertical angle of the camera
+	///
+	float m_vertical_angle;
+
+	///
+	///	@var	m_initial_fov
+	///
+	///	@brief	Initial field of view
+	///
+	float m_initial_fov;
+
+	///
+	///	@var	m_speed
+	///
+	///	@brief	The speed of the camera movement in units per sec
+	///
+	float m_speed;
+
+	///
+	///	@var	m_mouse_speed
+	///
+	///	@brief	The speed of the mouse movement in units per sec
+	///
+	float m_mouse_speed;
+
+	///
+	///	@brief	The perspective for the projection matrix
+	///
+	GLfloat m_perspective;
 };
 
 }
