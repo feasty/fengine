@@ -45,7 +45,7 @@ public:
 	/// @param[in]	look_at	The location the model should face
 	///	@param[in]	up		The up vector of the model
 	///
-	Fengine_camera(glm::vec3 pos, glm::vec3 look_at, glm::vec3 up);
+	Fengine_camera(glm::vec3 &pos, glm::vec3 &look_at, glm::vec3 &up);
 
 	///
 	/// @brief	The destructor
@@ -67,7 +67,7 @@ public:
 	///
 	///	@return	The projection matrix
 	///
-	glm::mat4 get_projection_matrix();
+	glm::mat4 &get_projection_matrix();
 
 protected:
 

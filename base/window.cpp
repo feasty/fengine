@@ -47,7 +47,7 @@ bool Fengine_window::initialise(string window_title)
 {
 	bool success = false;
 
-	Vec4 bg_colour(0.0f, 0.0f, 0.4f, 0.0f);
+	Vec4 bg_colour(0.0f, 0.0f, 0.3f, 0.0f);
 
 	if(glfwInit())
 	{

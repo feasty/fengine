@@ -44,7 +44,7 @@ public:
 	/// @param[in]	look_at	The location the model should face
 	///	@param[in]	up		The up vector of the model
 	///
-	Fengine_object(glm::vec3 pos, glm::vec3 look_at, glm::vec3 up);
+	Fengine_object(glm::vec3 &pos, glm::vec3 &look_at, glm::vec3 &up);
 
 	///
 	/// @brief	The destructor

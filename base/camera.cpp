@@ -59,7 +59,7 @@ Fengine_camera::Fengine_camera():
 			);
 }
 
-Fengine_camera::Fengine_camera(vec3 pos, vec3 look_at, vec3 up):
+Fengine_camera::Fengine_camera(vec3 &pos, vec3 &look_at, vec3 &up):
 		Fengine_object::Fengine_object(pos, look_at, up),
 		m_projection_mat(0.0f),
 		m_horizontal_angle(3.14f),
@@ -151,9 +151,9 @@ void Fengine_camera::move_camera()
 	// Projection matrix : 45° Field of View, 4:3 ratio, display range : 0.1 unit <-> 100 units
 	m_projection_mat = perspective(fov, m_perspective, 0.1f, 100.0f);
 
-	cout << "Position of cam: " <<m_position.x << " " << m_position.y << " " << m_position.z << endl;
-	cout << "Last time:" << last_time << endl;
-	cout << "Direction" << direction.x << " " << direction.y << " " << direction.z << endl;
+	//cout << "Position of cam: " <<m_position.x << " " << m_position.y << " " << m_position.z << endl;
+	//cout << "Last time:" << last_time << endl;
+	//cout << "Direction" << direction.x << " " << direction.y << " " << direction.z << endl;
 
 	// Camera matrix
 	m_model_matrix = lookAt(
@@ -167,7 +167,7 @@ void Fengine_camera::move_camera()
 }
 
 // Gets the projection matrix
-mat4 Fengine_camera::get_projection_matrix()
+mat4 &Fengine_camera::get_projection_matrix()
 {
 	return m_projection_mat;
 }

@@ -39,7 +39,7 @@ Fengine_object::Fengine_object():
 	m_model_matrix = lookAt(m_position, m_look_at, m_up);
 }
 
-Fengine_object::Fengine_object(glm::vec3 pos, glm::vec3 look_at, glm::vec3 up):
+Fengine_object::Fengine_object(glm::vec3 &pos, glm::vec3 &look_at, glm::vec3 &up):
 	m_model_matrix(1.0f),
 	m_position(pos),
 	m_look_at(look_at),

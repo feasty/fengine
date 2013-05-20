@@ -28,7 +28,9 @@
 
 #include <GL/glew.h>
 #include <glm/glm.hpp>
+
 #include <string>
+#include <vector>
 
 namespace fengine
 {
@@ -44,18 +46,18 @@ public:
 	///
 	/// @brief	A constructor that initialises the models position, look_at and up vectors
 	///
-	///	@param[in]	&virtex_shader		The full path to the vertex shader on disk
-	///	@param[in]	&fragment_shader	The full path to the fragment shader on disk
+	///	@param[in]	&model_path			The full path to the model on disk
+	///	@param[in]	&shader				The shader to use with the model
 	/// @param[in]	pos					The position to initialise to
 	/// @param[in]	look_at				The location the model should face
 	///	@param[in]	up					The up vector of the model
 	///
 	Fengine_model(
-			const std::string model_path,
+			const std::string &model_path,
 			Fengine_shader &shader,
-			glm::vec3 pos,
-			glm::vec3 look_at,
-			glm::vec3 up
+			glm::vec3 &pos,
+			glm::vec3 &look_at,
+			glm::vec3 &up
 			);
 
 	///
@@ -72,7 +74,14 @@ public:
 	///	@brief	This is a pure virtual which will draw the model. This is a pure virtual which must be
 	///			implemented by each models base class
 	///
-	virtual void draw() = 0;
+	void draw(glm::mat4 &mvp);
+
+	///
+	///	@brief	Getter for the models matrix
+	///
+	///	@return	Returns the models matrix
+	///
+	glm::mat4 get_model_matrix();
 
 protected:
 	///
@@ -102,11 +111,35 @@ private:
 	///
 	///	@brief	Loads a model from disk into a vertex buffer
 	///
-	///	@param[in]	model_path	The path on disk to the model which is to be loaded
+	///	@param[in]	model_path		The path on disk to the model which is to be loaded
+	///	@param[out]	&out_vertices	The return virtices
+	///	@param[out]	&out_uvs		The return UVs
+	///	@param[out]	&out_normals	The return normals
 	///
-	///	@return	Returns a pointer to a GLfloat vertex array
+	///	@return	Returns if the load was successful
 	///
-	const GLfloat *load_model(const std::string model_path);
+	bool load_model(const std::string model_path);
+
+	///
+	///	@var	m_vertices
+	///
+	///	@brief	The models vertices which are initialised in load_model
+	///
+	std::vector<glm::vec3> m_vertices;
+
+	///
+	///	@var	m_uvs
+	///
+	///	@brief	The models UVs which are initialised in load_model
+	///
+	std::vector<glm::vec2> m_uvs;
+
+	///
+	///	@var	m_normals
+	///
+	///	@brief	The models normals which are initialised in load_model
+	///
+	std::vector<glm::vec3> m_normals;
 
 };
 

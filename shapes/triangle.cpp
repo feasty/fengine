@@ -31,12 +31,10 @@ namespace shapes
 
 Fengine_triangle::Fengine_triangle(Fengine_shader &shader):
 		m_model_matrix(mat4(1.0f)),
-		m_shader_p(nullptr),
+		m_shader_p(&shader),
 		m_matrix_id(0),
 		m_vertexbuffer(0)
 {
-	m_shader_p = &shader;
-
 	// Get a handle for our "MVP" uniform
 	m_matrix_id = glGetUniformLocation(m_shader_p->get_program_id(), "MVP");
 
