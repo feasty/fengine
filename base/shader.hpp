@@ -50,6 +50,17 @@ public:
 	///
 	GLuint get_program_id();
 
+	///
+	///	@brief	Gets a uniform location ID from the shader
+	///
+	///	This method is used to get a handle to the shader variable name which is passed in
+	///
+	///	@param[in]	var_name	The shaders variable name
+	///
+	///	@raturn	Returns the handle ID
+	///
+	GLuint get_uniform_location(std::string var_name);
+
 protected:
 
 private:

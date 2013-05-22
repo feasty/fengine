@@ -30,22 +30,22 @@ namespace fengine
 {
 
 Fengine_object::Fengine_object():
-				m_model_matrix(1.0f),
+				m_object_matrix(1.0f),
 				m_position(0.0f, 0.0f, 0.0f),
 				m_look_at(0.0f, 0.0f, 0.0f),
 				m_up(0.0f, 1.0f, 0.0f)
 {
 	//Perform the translation on the objects matrix
-	m_model_matrix = lookAt(m_position, m_look_at, m_up);
+	m_object_matrix = lookAt(m_position, m_look_at, m_up);
 }
 
 Fengine_object::Fengine_object(glm::vec3 &pos, glm::vec3 &look_at, glm::vec3 &up):
-	m_model_matrix(1.0f),
+	m_object_matrix(1.0f),
 	m_position(pos),
 	m_look_at(look_at),
 	m_up(up)
 {
-	m_model_matrix = lookAt(m_position, m_look_at, m_up);
+	m_object_matrix = lookAt(m_position, m_look_at, m_up);
 }
 
 Fengine_object::~Fengine_object()
@@ -56,7 +56,7 @@ Fengine_object::~Fengine_object()
 void Fengine_object::update()
 {
 	//Perform the translation on the objects matrix
-	m_model_matrix = lookAt(m_position, m_look_at, m_up);
+	m_object_matrix = lookAt(m_position, m_look_at, m_up);
 }
 
 // Moved the object by the amount specified
@@ -84,13 +84,13 @@ void Fengine_object::move_to(glm::vec3 pos)
 // Gets the objects position vector
 glm::mat4 &Fengine_object::get_matrix()
 {
-	return m_model_matrix;
+	return m_object_matrix;
 }
 
 // Sets the objects position vector
 void Fengine_object::set_matrix(glm::mat4 mat)
 {
-	m_model_matrix = mat;
+	m_object_matrix = mat;
 }
 
 // Gets the objects position vector

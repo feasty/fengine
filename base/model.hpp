@@ -47,6 +47,7 @@ public:
 	/// @brief	A constructor that initialises the models position, look_at and up vectors
 	///
 	///	@param[in]	&model_path			The full path to the model on disk
+	///	@param[in]	&texture_path		The full path to the texture for the model on disk
 	///	@param[in]	&shader				The shader to use with the model
 	/// @param[in]	pos					The position to initialise to
 	/// @param[in]	look_at				The location the model should face
@@ -54,6 +55,7 @@ public:
 	///
 	Fengine_model(
 			const std::string &model_path,
+			const std::string &texture_path,
 			Fengine_shader &shader,
 			glm::vec3 &pos,
 			glm::vec3 &look_at,
@@ -76,14 +78,42 @@ public:
 	///
 	void draw(glm::mat4 &mvp);
 
-	///
-	///	@brief	Getter for the models matrix
-	///
-	///	@return	Returns the models matrix
-	///
-	glm::mat4 get_model_matrix();
-
 protected:
+
+private:
+	///
+	///	@brief	Loads a model from disk into a vertex buffer
+	///
+	///	@param[in]	model_path		The path on disk to the model which is to be loaded
+	///	@param[out]	&out_vertices	The return virtices
+	///	@param[out]	&out_uvs		The return UVs
+	///	@param[out]	&out_normals	The return normals
+	///
+	///	@return	Returns if the load was successful
+	///
+	bool load_model(const std::string model_path);
+
+	///
+	/// @var	m_vertex_buffer
+	///
+	///	@brief	The vertex buffer for our model
+	///
+	GLuint	m_vertex_buffer;
+
+	///
+	/// @var	m_uv_buffer
+	///
+	///	@brief	The uv buffer for our model
+	///
+	GLuint	m_uv_buffer;
+
+	///
+	/// @var	m_normal_buffer
+	///
+	///	@brief	The normal buffer for our model
+	///
+	GLuint	m_normal_buffer;
+
 	///
 	///	@var m_shader
 	///
@@ -101,24 +131,18 @@ protected:
 	GLuint m_matrix_id;
 
 	///
-	/// @var	m_vertex_buffer
+	///	@var m_texture_id
 	///
-	///	@brief	The vertex buffer for our model
+	///	@brief	Contains the texture ID for the model
 	///
-	GLuint	m_vertex_buffer;
+	GLuint m_texture_id;
 
-private:
 	///
-	///	@brief	Loads a model from disk into a vertex buffer
+	///	@var m_texture_handle
 	///
-	///	@param[in]	model_path		The path on disk to the model which is to be loaded
-	///	@param[out]	&out_vertices	The return virtices
-	///	@param[out]	&out_uvs		The return UVs
-	///	@param[out]	&out_normals	The return normals
+	///	@brief	Gets a handle to the texture sampler handle in the shader
 	///
-	///	@return	Returns if the load was successful
-	///
-	bool load_model(const std::string model_path);
+	GLuint m_texture_handle;
 
 	///
 	///	@var	m_vertices

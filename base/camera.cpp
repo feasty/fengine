@@ -156,7 +156,7 @@ void Fengine_camera::move_camera()
 	//cout << "Direction" << direction.x << " " << direction.y << " " << direction.z << endl;
 
 	// Camera matrix
-	m_model_matrix = lookAt(
+	m_object_matrix = lookAt(
 			m_position,				//Set the cameras position
 			m_position + direction,	//Looks at the same position but in the direction we calculated
 			m_up

@@ -135,7 +135,7 @@ protected:
 	///
 	///	@brief	The object view matrix
 	///
-	glm::mat4	m_model_matrix;
+	glm::mat4	m_object_matrix;
 
 	///
 	///	@var	m_position

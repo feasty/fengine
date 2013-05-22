@@ -52,6 +52,13 @@ protected:
 
 private:
 
+	///
+	///	@var	m_vertext_array_id
+	///
+	///	@brief	The vertex array
+	///
+	GLuint m_vertext_array_id;
+
 };
 
 }
